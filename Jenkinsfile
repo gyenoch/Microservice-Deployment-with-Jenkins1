@@ -29,6 +29,38 @@ pipeline {
                     serverUrl: 'https://14b2d3f625b31ab32fa28b8c949c2b64.gr7.us-east-1.eks.amazonaws.com/'
                 ]]) {
                     sh "kubectl get svc -n webapps"
+                    sleep 30
+                }
+            }
+        }
+
+        stage('Deploy ELK to Kubernetes') {
+            steps {
+                withKubeCredentials(kubectlCredentials: [[
+                    caCertificate: '',
+                    clusterName: 'EKS-1',
+                    contextName: '',
+                    credentialsId: 'k8-token',
+                    namespace: 'elk',
+                    serverUrl: 'https://14b2d3f625b31ab32fa28b8c949c2b64.gr7.us-east-1.eks.amazonaws.com/'
+                ]]) {
+                    sh "kubectl apply -f elk"
+                    sleep 60
+                }
+            }
+        }
+
+        stage('Verify ELK Deployment') {
+            steps {
+                withKubeCredentials(kubectlCredentials: [[
+                    caCertificate: '',
+                    clusterName: 'EKS-1',
+                    contextName: '',
+                    credentialsId: 'k8-token',
+                    namespace: 'elk',
+                    serverUrl: 'https://14b2d3f625b31ab32fa28b8c949c2b64.gr7.us-east-1.eks.amazonaws.com/'
+                ]]) {
+                    sh "kubectl get svc -n elk"
                 }
             }
         }
