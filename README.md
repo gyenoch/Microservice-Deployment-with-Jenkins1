@@ -3,7 +3,6 @@
 
 ![Screenshot 2024-09-08 045210](https://github.com/user-attachments/assets/cb62b1f9-9b4c-4404-83d4-b995ac6c3f6c)
 
-
 ## Deploying a Modern Microservice Application in using Jenkins[Simple Deployment Setup]
 
 This project demonstrates the deployment of a microservices-based application on an Amazon EKS cluster using Jenkins for automated deployment. The Jenkins pipeline automates the process of applying Kubernetes manifests to the EKS cluster, enabling seamless, scalable deployment of the application. Kubernetes manages the microservices, ensuring reliability and efficient resource use.
